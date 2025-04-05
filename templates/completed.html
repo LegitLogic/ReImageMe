@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Completed Builds</title>
+  <!-- Comic-style font -->
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #000;
+      background-image: url('{{ url_for("static", filename="completed-bg.jpg") }}');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-attachment: fixed;
+      padding: 2rem;
+      margin: 0;
+      color: #000;
+    }
+
+    .overlay {
+      background-color: rgba(255, 255, 255, 0.85); /* transparent overlay */
+      padding: 2rem;
+      border-radius: 10px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    h1 {
+      font-family: 'Bangers', cursive;
+      font-size: 2.5rem;
+      color: #28a745;
+      text-shadow: 2px 2px 0 #000;
+      margin-bottom: 1rem;
+    }
+
+    a {
+      color: #007bff;
+      text-decoration: none;
+      margin-bottom: 1rem;
+      display: inline-block;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: rgba(255, 255, 255, 0.95);
+      border: 3px solid #000;
+      box-shadow: 6px 6px 0 #000;
+      margin-top: 1rem;
+    }
+
+    th, td {
+      padding: 0.75rem;
+      border-bottom: 1px solid #ccc;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f1f1f1;
+      font-weight: bold;
+    }
+
+    tbody tr:hover {
+      background-color: #e7ffe7;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+
+    <h1>✅ Completed Builds</h1>
+    <a href="/">← Back to Main Queue</a>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Serial Number</th>
+          <th>Owner</th>
+          <th>Department</th>
+          <th>Date Received</th>
+          <th>Status</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in completed %}
+        <tr>
+          <td>{{ item[0] }}</td>
+          <td>{{ item[1] }}</td>
+          <td>{{ item[2] }}</td>
+          <td>{{ item[3] }}</td>
+          <td>{{ item[4] }}</td>
+          <td>{{ item[5] }}</td>
+          <td>{{ item[6] }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+  </div>
+</body>
+</html>

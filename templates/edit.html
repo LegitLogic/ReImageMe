@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Entry</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #000;
+      background-image: url('{{ url_for("static", filename="villains-bg.jpg") }}');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: top center;
+      background-attachment: fixed;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 2rem;
+    }
+
+    .overlay {
+      background-color: rgba(255, 255, 255, 0.88);
+      padding: 2rem;
+      border-radius: 10px;
+      max-width: 400px;
+      margin: auto;
+      box-shadow: 8px 8px 0 #000;
+    }
+
+    h1 {
+      font-family: 'Bangers', cursive;
+      color: #d80000;
+      text-align: center;
+      text-shadow: 2px 2px #000;
+      font-size: 2rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    input, select, textarea {
+      margin-bottom: 1rem;
+      padding: 0.5rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    button {
+      background-color: #ffcc00;
+      color: #000;
+      font-family: 'Bangers', cursive;
+      font-weight: bold;
+      font-size: 1rem;
+      padding: 0.5rem 1rem;
+      border: 2px solid #000;
+      border-radius: 6px;
+      box-shadow: 3px 3px 0 #000;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      background-color: #ffb700;
+    }
+
+    .back-link {
+      text-align: center;
+      margin-top: 1rem;
+      display: block;
+      font-size: 0.9rem;
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <h1>✏️ Edit Entry #{{ item[0] }}</h1>
+    <form action="{{ url_for('update', item_id=item[0]) }}" method="POST">
+      <input type="text" name="serial" value="{{ item[1] }}" required>
+      <input type="text" name="owner" value="{{ item[2] }}" required>
+      <input type="text" name="department" value="{{ item[3] }}" required>
+      <select name="status">
+        <option value="Waiting" {% if item[5] == 'Waiting' %}selected{% endif %}>Waiting</option>
+        <option value="In Progress" {% if item[5] == 'In Progress' %}selected{% endif %}>In Progress</option>
+        <option value="Complete" {% if item[5] == 'Complete' %}selected{% endif %}>Complete</option>
+      </select>
+      <textarea name="notes" rows="4" placeholder="Optional notes...">{{ item[6] }}</textarea>
+      <button type="submit">💾 Save Changes</button>
+    </form>
+    <a href="{{ url_for('index') }}" class="back-link">← Back to Queue</a>
+  </div>
+</body>
+</html>
